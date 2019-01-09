@@ -1,5 +1,6 @@
 package com.ssm.controller;
 
+import com.ssm.entity.PageUtil;
 import com.ssm.entity.User;
 import com.ssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：用户controller类定义
@@ -46,9 +49,23 @@ public class UserController {
      * @return
      */
     @RequestMapping("/userList")
-    public String userList(Model model){
-        List<User> users = userService.getUserList();
+    public String userList(Model model , @RequestParam(value = "page" , required = false) Integer page){
+
+        if(page == null){
+            page = 1;
+        }
+        PageUtil pageUtil = new PageUtil(page,10);
+        Map<String,Object> map = new HashMap<>();
+        map.put("start" , pageUtil.getStart());
+        map.put("size",pageUtil.getSize());
+
+
+        List<User> users = userService.getUserList(map);
         model.addAttribute("userList",users);
+        model.addAttribute("currentPage",page);
+
+        int maxPage = userService.getCount()% pageUtil.getSize() == 0?userService.getCount()/pageUtil.getSize():userService.getCount()/pageUtil.getSize()+1;
+        model.addAttribute("maxPage" ,maxPage );
         return "userList";
     }
 

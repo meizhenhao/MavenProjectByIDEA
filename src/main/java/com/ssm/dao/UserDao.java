@@ -3,6 +3,7 @@ package com.ssm.dao;
 import com.ssm.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：用户User的dao接口定义
@@ -34,10 +35,16 @@ public interface UserDao {
     User getUserById(int id);
 
     /**
-     * 查询所有用户
+     * 分页查询所有用户
      * @return
      */
-    List<User> getUserList();
+    List<User> getUserList(Map<String,Object> map);
+
+    /**
+     * 查询所有用户的个数
+     * @return
+     */
+    int getCount();
 
     /**
      * 更新用户信息

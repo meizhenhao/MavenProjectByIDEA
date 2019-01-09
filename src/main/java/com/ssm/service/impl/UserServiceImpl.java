@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：
@@ -20,6 +21,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserDao userDao;
+
+    @Override
+    public int getCount() {
+        return userDao.getCount();
+    }
 
     @Override
     public int addUser(User user) {
@@ -37,8 +43,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserList() {
-        return userDao.getUserList();
+    public List<User> getUserList(Map<String,Object> map) {
+        return userDao.getUserList(map);
     }
 
     @Override

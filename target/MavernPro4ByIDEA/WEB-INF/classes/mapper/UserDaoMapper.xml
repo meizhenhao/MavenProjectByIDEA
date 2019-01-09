@@ -32,8 +32,12 @@
         FROM user
         WHERE id=#{id}
     </select>
-    <select id="getUserList" resultMap="UserResultMap">
-        SELECT * FROM user
+    <select id="getUserList" parameterType="map" resultMap="UserResultMap">
+        SELECT * FROM user limit #{start} ,#{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT count(*) FROM user
     </select>
 
 </mapper>

@@ -56,6 +56,19 @@
         </c:forEach>
 
     </table>
+    <nav aria-label="...">
+        <ul class="pager">
+            <c:choose>
+                <c:when test="${currentPage == 1}"><li><a style="color: #dddddd">上一页</a></li></c:when>
+                <c:otherwise><li><a href="user/userList?page=${currentPage-1}">上一页</a></li></c:otherwise>
+            </c:choose>
+
+            <c:choose>
+                <c:when test="${maxPage == currentPage}"><li><a style="color: #dddddd">下一页</a></li></c:when>
+                <c:otherwise><li><a href="user/userList?page=${currentPage+1}">下一页</a></li></c:otherwise>
+            </c:choose>
+        </ul>
+    </nav>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>

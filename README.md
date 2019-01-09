@@ -1,0 +1,2 @@
+# MavenProjectByIDEA
+采用IDEA开发工具，使用maven管理项目依赖，采用当前比较流行的Spring+SpringMVC+Mybatis框架，实现了用户的增删查改的基本功能
